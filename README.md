@@ -1,27 +1,27 @@
-# Hello
+# A VINS-Fusion Fork with configurations for MCD VIRAL dataset
 
-This is a forked repository of [VINS-Fusion](https://github.com/HKUST-Aerial-Robotics/VINS-Fusion).
+# Adapting VINS-Fusion for OpenCV 4.2, Ubuntu 20.04, ROS Noetic
 
-In this we add extra script and configuration files to quickly run the experiments on [NTU VIRAL dataset](https://ntu-aris.github.io/ntu_viral_dataset/).
+(Credits to https://github.com/rkuo2000/VINS-Fusion/)
 
-## Instructions
+## Modifications:
+1. all CMakeFiles.txt: set(CMAKE_CXX_FLAGS "-std=c++14")
+2. camera_model/src/chessboard/Chessboard.cc
+   - #include <opencv2/imgproc/types_c.h>
+   - CV_AA = cv::LINE_AA, CV_GRAY2BGR = cv::COLOR_GRAY2BGR, CV_RGB2GRAY = cv::COLOR_RGB2GRAY
+   - cv::CALIB_CB_ADAPTIVE_THRESH, cv::CALIB_CB_NORMALIZE_IMAGE, cv::CALIB_CB_FILTER_QUADS, cv::CALIB_CB_FAST_CHECK
+3. camera_model/src/intrinsic_calib.cc
+4. camera_model/src/calib/CameraCalibration.cc
+5. vins_estimator/src/featureTracker/feature_tracker.cpp
+6. loop_fusion/src/pose_graph.cpp
+   - cv::FONT_HERSHEY_SIMPLEX
+7. vins_estimator/src/KITTIOdomTest.cpp
+8. vins_estimator/src/KITTIGPSTest.cpp   
+   - CV_LOAD_IMAGE_GRAYSCALE = cv::IMREAD_GRAYSCALE
+   
+9. .yaml in config folder
+   - modify output_path & pose_graph_save_path ("./output" & "./output/pose_graph")
 
-1. After you have cloned and compiled the package, please cd to the launch folder by running `roscd vins/launch`.
-
-2. Modify the script `runall_ntuviral.sh` to declare the output directory via the variable `EPOC_DIR`, and the path to the dataset via the `DATASET_LOCATION` variable. Note that the bag files should be orgnanized like in the figure below:
-
-<p align="center">
-  <img height="300" src="docs/picture/structure.png">
-</p>
-
-
-3. Run `bash runall_ntuviral.sh` to automatically launch the algo with the bag files one by one.
-
-4. The log files will be created in .csv format and you can use matlab or python to calculate the localization error against the ground truth on these logs. An example of the analysis can be found in the `VINS-Fusion/analysis/ntuviral_vinsfusion` folder. Just run the MATLAB script `checkall_parallel.m` and the results will be printed out.
-
-If you use the NTU VIRAL dataset in your work, please cite our work using the BibTex code at the dataset's [website](https://ntu-aris.github.io/ntu_viral_dataset/). Please also cite VINS-Fusion's publication below.
-
-# VINS-Fusion
 ## An optimization-based multi-sensor state estimator
 
 <img src="https://github.com/HKUST-Aerial-Robotics/VINS-Fusion/blob/master/support_files/image/vins_logo.png" width = 55% height = 55% div align=left />

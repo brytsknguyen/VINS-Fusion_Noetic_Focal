@@ -12,9 +12,9 @@ cd $CURR_DIR
 echo CURRENT DIR: $CURR_DIR
 echo VINS DIR:    $PACKAGE_DIR
 
-export EPOC_DIR=/home/$USER/nucssd2/MATLAB_WS/RAL_VIRAL_SLAM/ntuviral_vinsfusion
+export EPOC_DIR=/home/$USER/MATLAB/myWS/RAL_VIRAL_SLAM/ntuviral_vinsfusion
+
 export DATASET_LOCATION=/home/$USER/DATASETS/NTU_VIRAL/
-# export DATASET_LOCATION=/media/$USER/myHPSSD/NTU_VIRAL
 
 export CAPTURE_SCREEN=false;
 export LOG_DATA=true;
