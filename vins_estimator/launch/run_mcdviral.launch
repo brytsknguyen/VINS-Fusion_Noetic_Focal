@@ -1,22 +1,20 @@
 <?xml version="1.0"?>
 <launch>
 
-
     <!-- ######### Enable the automatic change to new dataset ########### -->
     <arg name="autorun" default = "false" />
 
     <!-- log direction for the vis aid -->
     <arg name="log_dir" default="/home/$(env USER)/" />
 
-    <!-- Config file -->
-    <!-- <arg name="config_path" default="$(find vins)/../config/mcdviral/mcdviral_atv/" /> -->
-    <arg name="config_path" default="$(find vins)/../config/mcdviral/mcdviral_hhs/" />
-
-
     <!-- ######### Choose the dataset ################################### -->
     <!-- <arg name="bag_file" default = "/media/tmn/mySataSSD2/DATASETS/MCDVIRAL/PublishedSequences/ntu_day_01/*.bag" /> -->
     <arg name="bag_file" default = "/media/tmn/mySataSSD2/DATASETS/MCDVIRAL/PublishedSequences/kth_day_06/*.bag" />
 
+    <!-- Chose the config file based on the sequence names -->
+    <arg name="config_path" value="$(find vins)/../config/mcdviral/mcdviral_atv/" if="$(eval 'ntu_'  in bag_file)" />
+    <arg name="config_path" value="$(find vins)/../config/mcdviral/mcdviral_hhs/" if="$(eval 'kth_'  in bag_file)" />
+    <arg name="config_path" value="$(find vins)/../config/mcdviral/mcdviral_hhs/" if="$(eval 'tuhh_' in bag_file)" />
 
     <!-- VINS node -->    
     <node respawn="true" pkg="vins" type="vins_node" name="vins_estimator"
@@ -38,7 +36,7 @@
 
     <!-- ######### Play the dataset ###################################### -->
     <param name="/use_sim_time" value="true" />
-    <node required="false" pkg="rosbag" type="play" name="rosbag_player"
+    <node required="$(arg autorun)" pkg="rosbag" type="play" name="rosbag_player"
           args="$(arg bag_file) -r 1.0 -s 0"
           launch-prefix="bash -c 'sleep 1; $0 $@' "/>
 
