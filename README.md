@@ -1,10 +1,9 @@
 # A VINS-Fusion Fork with configurations for MCD VIRAL dataset
 
-# Adapting VINS-Fusion for OpenCV 4.2, Ubuntu 20.04, ROS Noetic
+## Adaptations for OpenCV 4.2, Ubuntu 20.04, ROS Noetic
 
 (Credits to https://github.com/rkuo2000/VINS-Fusion/)
 
-## Modifications:
 1. all CMakeFiles.txt: set(CMAKE_CXX_FLAGS "-std=c++14")
 2. camera_model/src/chessboard/Chessboard.cc
    - #include <opencv2/imgproc/types_c.h>
