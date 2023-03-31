@@ -387,7 +387,7 @@ void command()
             m_process.unlock();
             printf("save pose graph finish\nyou can set 'load_previous_pose_graph' to 1 in the config file to reuse it next time\n");
             printf("program shutting down...\n");
-            ros::shutdown();
+            // ros::shutdown();
         }
         if (c == 'n')
             new_sequence();
@@ -450,7 +450,7 @@ int main(int argc, char **argv)
     m_camera = camodocal::CameraFactory::instance()->generateCameraFromYamlFile(cam0Path.c_str());
 
     fsSettings["image0_topic"] >> IMAGE_TOPIC;        
-    fsSettings["pose_graph_save_path"] >> POSE_GRAPH_SAVE_PATH;
+    n.param<std::string>("pose_graph_save_path", POSE_GRAPH_SAVE_PATH, "/home/tmn/output");
     fsSettings["output_path"] >> VINS_RESULT_PATH;
     fsSettings["save_image"] >> DEBUG_IMAGE;
 
@@ -498,6 +498,10 @@ int main(int argc, char **argv)
     keyboard_command_process = std::thread(command);
     
     ros::spin();
+
+    m_process.lock();
+    posegraph.savePoseGraph();
+    m_process.unlock();
 
     return 0;
 }
