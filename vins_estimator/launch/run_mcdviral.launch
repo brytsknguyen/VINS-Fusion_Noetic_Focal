@@ -2,10 +2,10 @@
 <launch>
 
     <!-- ######### Enable the automatic change to new dataset ########### -->
-    <arg name="autorun" default = "false" />
+    <arg name="autorun" default="0" />
 
     <!-- log direction for the vis aid -->
-    <arg name="log_dir" default="/home/$(env USER)/" />
+    <arg name="exp_log_dir" default="/home/$(env USER)/" />
 
     <!-- ######### Choose the dataset ################################### -->
     <!-- <arg name="bag_file" default = "/media/tmn/mySataSSD2/DATASETS/MCDVIRAL/PublishedSequences/ntu_day_01/*.bag" /> -->
@@ -25,7 +25,7 @@
     <!-- Loop fusion -->
     <node respawn="true" pkg="loop_fusion" type="loop_fusion_node" name="loop_fusion"
           args="$(arg config_path)/viral_stereo_imu_config.yaml" output="screen">
-          <param name="pose_graph_save_path" value="$(arg log_dir)/vins_ba_"/>
+          <param name="pose_graph_save_path" value="$(arg exp_log_dir)/vins_ba_"/>
     </node>
 
     <!-- Visualization node -->

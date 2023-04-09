@@ -924,9 +924,9 @@ void PoseGraph::savePoseGraph()
         //     imwrite(image_path.c_str(), (*it)->image);
         // }
         Quaterniond VIO_tmp_Q{(*it)->vio_R_w_i};
-        Quaterniond PG_tmp_Q{(*it)->R_w_i};
         Vector3d VIO_tmp_T = (*it)->vio_T_w_i;
-        Vector3d PG_tmp_T  = (*it)->T_w_i;
+        Quaterniond PG_tmp_Q{(*it)->R_w_i};
+        Vector3d PG_tmp_T = (*it)->T_w_i;
 
         fprintf (pFile, " %d,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%d,%f,%f,%f,%f,%f,%f,%f,%f,%d\n",
                         (*it)->index, (*it)->time_stamp, 
