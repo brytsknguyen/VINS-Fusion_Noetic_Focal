@@ -37,8 +37,8 @@
 
     <!-- ######### Play the dataset ###################################### -->
     <param name="/use_sim_time" value="true" />
-    <node required="$(arg autorun)" pkg="rosbag" type="play" name="rosbag_player"
-          args="$(arg bag_file) -r 1.0 -s 0"
+    <node required="$(eval autorun != 0)" pkg="rosbag" type="play" name="rosbag_player"
+          args="$(arg bag_file) -r 0.5 -s 0"
           launch-prefix="bash -c 'sleep 1; $0 $@' "/>
 
 </launch>
