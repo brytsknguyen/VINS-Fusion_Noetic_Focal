@@ -8,9 +8,11 @@
     <arg name="exp_log_dir" default="/home/$(env USER)/" />
 
     <!-- ######### Choose the dataset ################################### -->
-    <!-- <arg name="bag_file" default = "/media/tmn/mySataSSD2/DATASETS/MCDVIRAL/PublishedSequences/ntu_day_01/*.bag" /> -->
-    <!-- <arg name="bag_file" default = "/media/tmn/mySataSSD2/DATASETS/MCDVIRAL/PublishedSequences/kth_day_06/*.bag" /> -->
-    <arg name="bag_file" default = "/media/tmn/mySataSSD2/DATASETS/MCDVIRAL/PublishedSequences/tuhh_day_02/*.bag" />
+    <!-- <arg  name="bag_file"  default="/media/tmn/mySataSSD1/DATASETS/MCDVIRAL/PublishedSequences/ntu_day_01/*.bag"/> -->
+    <arg  name="bag_file"  default="/media/tmn/mySataSSD1/DATASETS/MCDVIRAL/PublishedSequences/ntu_night_04/*.bag"/>
+
+    <!-- <arg name="bag_file" default = "/media/tmn/mySataSSD1/DATASETS/MCDVIRAL/PublishedSequences/kth_day_06/*.bag" /> -->
+    <!-- <arg name="bag_file" default = "/media/tmn/mySataSSD1/DATASETS/MCDVIRAL/PublishedSequences/tuhh_day_03/*.bag" /> -->
 
     <!-- Chose the config file based on the sequence names -->
     <arg name="config_path" value="$(find vins)/../config/mcdviral/mcdviral_atv/" if="$(eval 'ntu_'  in bag_file)" />
@@ -38,7 +40,7 @@
     <!-- ######### Play the dataset ###################################### -->
     <param name="/use_sim_time" value="true" />
     <node required="$(eval autorun != 0)" pkg="rosbag" type="play" name="rosbag_player"
-          args="$(arg bag_file) -r 0.5 -s 0"
+          args="$(arg bag_file) -r 1.0 -s 0"
           launch-prefix="bash -c 'sleep 1; $0 $@' "/>
 
 </launch>
