@@ -8,11 +8,16 @@
     <arg name="exp_log_dir" default="/home/$(env USER)/" />
 
     <!-- ######### Choose the dataset ################################### -->
-    <!-- <arg  name="bag_file"  default="/media/tmn/mySataSSD1/DATASETS/MCDVIRAL/PublishedSequences/ntu_day_01/*.bag"/> -->
-    <arg  name="bag_file"  default="/media/tmn/mySataSSD1/DATASETS/MCDVIRAL/PublishedSequences/ntu_night_04/*.bag"/>
 
-    <!-- <arg name="bag_file" default = "/media/tmn/mySataSSD1/DATASETS/MCDVIRAL/PublishedSequences/kth_day_06/*.bag" /> -->
-    <!-- <arg name="bag_file" default = "/media/tmn/mySataSSD1/DATASETS/MCDVIRAL/PublishedSequences/tuhh_day_03/*.bag" /> -->
+    <!-- Dataset path -->
+    <arg  name="data_path" default="/media/tmn/mySataSSD1/DATASETS/MCDVIRAL/PublishedSequences"/>
+
+    <!-- Choose the sequence -->
+    <!-- <arg  name="bag_file"  default="$(arg data_path)/ntu_day_01/*.bag"/> -->
+    <arg  name="bag_file"  default="$(arg data_path)/ntu_night_04/*.bag"/>
+
+    <!-- <arg name="bag_file" default = "$(arg data_path)/kth_day_06/*.bag" /> -->
+    <!-- <arg name="bag_file" default = "$(arg data_path)/tuhh_day_03/*.bag" /> -->
 
     <!-- Chose the config file based on the sequence names -->
     <arg name="config_path" value="$(find vins)/../config/mcdviral/mcdviral_atv/" if="$(eval 'ntu_'  in bag_file)" />
